@@ -1,8 +1,9 @@
-package ressource;
+package tn.enis.controller;
 
-import model.Consultation;
-import repo.ConsultationRepo;
-import repo.PatientRepo;
+import tn.enis.model.Consultation;
+import tn.enis.repository.ConsultationRepo;
+import tn.enis.repository.PatientRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class ConsultationResource {
+public class ConsultationController {
 
     @Autowired
     private ConsultationRepo consultationRepo;

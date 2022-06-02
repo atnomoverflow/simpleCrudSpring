@@ -1,4 +1,4 @@
-package model;
+package tn.enis.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ public class Consultation {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id", nullable = false)
+        @Column(name = "id_consultation", nullable = false)
         private Long id;
 
         @ManyToOne(cascade = CascadeType.ALL)

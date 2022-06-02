@@ -1,34 +1,35 @@
-package ressource;
+package tn.enis.controller;
 
 
-import model.Patient;
-import repo.PatientRepo;
+import tn.enis.model.Patient;
+import tn.enis.repository.PatientRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class PatientResource {
+public class PatientController {
 
     @Autowired
     private PatientRepo patientRepo;
 
-    @PostMapping("/new-patient")
+    @PostMapping("/")
     @ResponseBody
     ResponseEntity<Patient> createPatient(@RequestBody Patient patient){
         patientRepo.save(patient);
         return ResponseEntity.ok(patient);
     }
-    @GetMapping("/get-patient")
+    @GetMapping("/")
     @ResponseBody
-    ResponseEntity<Patient> getPatient(@RequestBody Patient patient){
-        Patient result = patientRepo.findById(patient.getCin()).get();
+    ResponseEntity<Patient> getAllPatient(@RequestBody Patient patient){
+        Patient result = patientRepo.findById(patient.getId()).get();
         return ResponseEntity.ok(result);
     }
-    @DeleteMapping("/delete-patient")
+    @DeleteMapping("/")
     ResponseEntity<HttpStatus> deletePatient(@RequestBody Patient patient){
-        patientRepo.deleteById(patient.getCin());
+        patientRepo.deleteById(patient.getId());
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

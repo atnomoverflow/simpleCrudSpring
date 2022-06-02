@@ -1,4 +1,4 @@
-package model;
+package tn.enis.model;
 import javax.persistence.*;
 
 @Entity
@@ -7,7 +7,7 @@ public class Medicament {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_medicament", nullable = false)
-    private Long idMedicament;
+    private Long id;
 
     private String nomMedicament;
 
@@ -16,15 +16,16 @@ public class Medicament {
     private Consultation consultation;
 
 
-    public Long getIdMedicament() {
-        return idMedicament;
-    }
 
-    public void setIdMedicament(Long idMedicament) {
-        this.idMedicament = idMedicament;
-    }
+    public Long getId() {
+		return id;
+	}
 
-    public String getNomMedicament() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNomMedicament() {
         return nomMedicament;
     }
 
