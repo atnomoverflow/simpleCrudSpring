@@ -1,8 +1,9 @@
 package tn.enis.controller;
 
-
 import tn.enis.model.Patient;
-import tn.enis.repository.PatientRepo;
+import tn.enis.service.PatientService;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,27 +11,41 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("patient")
 public class PatientController {
+	@Autowired
+	private PatientService patientService;
 
-    @Autowired
-    private PatientRepo patientRepo;
+	@GetMapping("/")
+	public List<Patient> getAllPatient() {
+		List<Patient> patients = patientService.findAllPatients();
+		return patients;
+	}
 
-    @PostMapping("/")
-    @ResponseBody
-    ResponseEntity<Patient> createPatient(@RequestBody Patient patient){
-        patientRepo.save(patient);
-        return ResponseEntity.ok(patient);
-    }
-    @GetMapping("/")
-    @ResponseBody
-    ResponseEntity<Patient> getAllPatient(@RequestBody Patient patient){
-        Patient result = patientRepo.findById(patient.getId()).get();
-        return ResponseEntity.ok(result);
-    }
-    @DeleteMapping("/")
-    ResponseEntity<HttpStatus> deletePatient(@RequestBody Patient patient){
-        patientRepo.deleteById(patient.getId());
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
+	@GetMapping("/{id}")
+	public Patient getPatientById(@PathVariable("id") Long id) {
+		Patient patient = patientService.findPatientById(id);
+		return patient;
+	}
 
+	@PostMapping("/")
+	public Patient addPatient(@RequestBody Patient patient) {
+		Patient newpatient = patientService.addPatient(patient);
+		return newpatient;
+
+	}
+
+	@PutMapping("/update")
+	public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient) {
+		Patient updatepatient = patientService.updatePatient(patient);
+		return new ResponseEntity<>(updatepatient, HttpStatus.OK);
+
+	}
+
+	@DeleteMapping("/{id}")
+	public boolean deletePatient(@PathVariable("id") Long id) {
+		patientService.deletePatient(id);
+		return true;
+
+	}
 }

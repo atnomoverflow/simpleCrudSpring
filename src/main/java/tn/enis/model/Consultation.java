@@ -15,7 +15,7 @@ public class Consultation {
         private Long id;
 
         @ManyToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name = "cin", nullable = false)
+        @JoinColumn(name = "id_patient", nullable = false)
         private Patient patient;
 
         @JsonFormat(locale="tn", timezone="GMT+1", pattern="yyyy-MM-dd")
